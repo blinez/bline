@@ -13,3 +13,5 @@ jobs:
       run: cd ui; npm install
     - name: build
       run: cd ui; npm run build
+    - name: deploy
+      run: npm run deploy --only hosting
