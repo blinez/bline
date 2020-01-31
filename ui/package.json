@@ -22,6 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "verify": "npm run pretty && npm run lint && CI=true npm test",
     "lint": "eslint 'src/**/*.tsx'",
     "pretty": "prettier --write 'src/**/*.tsx'",
     "eject": "react-scripts eject",

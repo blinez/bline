@@ -1,4 +1,4 @@
-name: 'Build ui'
+name: '[UI] Pipeline'
 
 on:
   push:
@@ -14,13 +14,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout code
+        uses: actions/checkout@v2
+
+    - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
     - name: Install Dependencies
       run: npm ci
       working-directory: ${{ env.UI_DIR }}
-    - name: build
+
+    - name: Test
+      run: npm run verify
+      working-directory: ${{ env.UI_DIR }}
+
+    - name: Build
       run: npm run build
       working-directory: ${{ env.UI_DIR }}
+
     - name: Deploy to Firebase
       uses: w9jds/firebase-action@master
       with:
