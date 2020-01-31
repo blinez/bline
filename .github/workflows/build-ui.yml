@@ -3,7 +3,7 @@ name: 'Build ui'
 on:
   push:
     paths:
-      - 'ui/*'
+      - 'ui/**'
 
 jobs:
   build:
