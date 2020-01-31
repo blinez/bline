@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'ui/**'
+      - '.github/workflows/build-ui.yml'
 
 env:
   UI_DIR: './ui'
