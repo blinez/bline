@@ -5,17 +5,21 @@ on:
     paths:
       - 'ui/**'
 
+env:
+  UI_DIR: './ui'
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
     - name: Install Dependencies
-      run: cd ui; npm install
+      run: npm ci
+      working-directory: ${{ env.UI_DIR }}
     - name: build
-      run: cd ui; npm run build
+      run: npm run build
+      working-directory: ${{ env.UI_DIR }}
     - name: Deploy to Firebase
       uses: w9jds/firebase-action@master
       with:
