@@ -2,6 +2,8 @@ name: '[UI] Pipeline'
 
 on:
   push:
+    branches:
+      - master
     paths:
       - 'ui/**'
       - '.github/workflows/build-ui.yml'
