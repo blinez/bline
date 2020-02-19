@@ -1,15 +1,12 @@
-name: '[UI] Verify dependabot PR'
+name: '[UI] Verify PR'
 
 on:
   pull_request:
     branches:
       - master
-  push:
-    branches:
-      - 'dependabot/npm_and_yarn/ui/**'
     paths:
       - 'ui/**'
-      - '.github/workflows/ui-verify-dependabot.yml'
+      - '.github/workflows/ui-verify-pr.yml'
 
 env:
   UI_DIR: './ui'
