@@ -1,0 +1,40 @@
+name: '[UI] Verify dependabot PR'
+
+on:
+  push:
+    branches:
+      - 'dependabot/npm_and_yarn/ui/**'
+    paths:
+      - 'ui/**'
+      - '.github/workflows/ui-verify-dependabot.yml'
+
+env:
+  UI_DIR: './ui'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ${{ env.UI_DIR }}
+
+      - name: Test
+        run: npm run verify
+        working-directory: ${{ env.UI_DIR }}
