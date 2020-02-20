@@ -8,7 +8,7 @@ async function emailLogin(email: string, emailLink: string): Promise<void> {
 
 async function sendEmailLink(email: string): Promise<void> {
     const actionCodeSettings = {
-        url: 'http://localhost:3000/finishSignUp',
+        url: 'https://bline.mboyz.de/finishSignUp',
         handleCodeInApp: true
     };
 
