@@ -1,19 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import UnauthenticatedApp from './UnauthenticatedApp';
+import {useUser} from './auth/UserContext';
+import AuthenticatedApp from './AuthenticatedApp';
 
-const App: React.FC = () => {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>Welcome to bline (G and A and B were here)!!</p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    Learn React too
-                </a>
-            </header>
-        </div>
-    );
-};
+function App() {
+    const user = useUser();
+
+    if (user) {
+        return <AuthenticatedApp />;
+    } else {
+        return <UnauthenticatedApp />;
+    }
+}
 
 export default App;
