@@ -1,12 +1,28 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
+import AccountSettingsScreen from './screens/AccountSettingsScreen';
+import Button from "@material-ui/core/Button";
+import {useAuth} from "./auth/AuthContext";
+import {useAuthenticatedUser} from "./auth/UserContext";
 
 function AuthenticatedApp() {
+    const auth = useAuth();
+    const user = useAuthenticatedUser();
+
+    function clickHandler() {
+        user.updateProfile({displayName: null});
+        auth.logout();
+    }
+
     return (
         <div>
+            <Button onClick={clickHandler} variant="contained" fullWidth={false}>
+                Sign Out
+            </Button>
             <Router>
                 <Switch>
+                    <Route path={'/settings'} component={AccountSettingsScreen} />
                     <Route component={HomeScreen} />
                 </Switch>
             </Router>
