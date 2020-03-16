@@ -2,7 +2,7 @@ import {TextField} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useAuthenticatedUser} from '../../auth/UserContext';
-import {useHistory} from "react-router-dom";
+import {useHistory} from 'react-router-dom';
 
 function AccountSettingsScreen() {
     const user = useAuthenticatedUser();

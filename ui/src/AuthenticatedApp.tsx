@@ -2,9 +2,9 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import AccountSettingsScreen from './screens/AccountSettingsScreen';
-import Button from "@material-ui/core/Button";
-import {useAuth} from "./auth/AuthContext";
-import {useAuthenticatedUser} from "./auth/UserContext";
+import Button from '@material-ui/core/Button';
+import {useAuth} from './auth/AuthContext';
+import {useAuthenticatedUser} from './auth/UserContext';
 
 function AuthenticatedApp() {
     const auth = useAuth();

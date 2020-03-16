@@ -1,6 +1,6 @@
 import React from 'react';
 import {useAuthenticatedUser} from '../../auth/UserContext';
-import {useHistory} from "react-router-dom";
+import {useHistory} from 'react-router-dom';
 
 function HomeScreen() {
     const user = useAuthenticatedUser();

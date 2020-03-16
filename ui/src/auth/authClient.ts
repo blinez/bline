@@ -1,4 +1,5 @@
 import {fbBline} from '../firebase/firebase';
+import {getEnv} from '../core/env/envService';
 
 async function emailLogin(email: string, emailLink: string): Promise<void> {
     await fbBline.auth().signInWithEmailLink(email, emailLink);
@@ -7,8 +8,9 @@ async function emailLogin(email: string, emailLink: string): Promise<void> {
 }
 
 async function sendEmailLink(email: string): Promise<void> {
+    const env = getEnv();
     const actionCodeSettings = {
-        url: 'https://bline.mboyz.de/finishSignUp',
+        url: `${env.baseUrl}/finishSignUp`,
         handleCodeInApp: true
     };
 
