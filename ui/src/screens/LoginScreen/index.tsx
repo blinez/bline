@@ -7,7 +7,10 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(() => ({
     widget: {
-        padding: '10px'
+        padding: '10px',
+        width: '800px',
+        margin: 'auto',
+        marginTop: '10%'
     }
 }));
 
@@ -26,8 +29,7 @@ function LoginScreen() {
 
     return (
         <Paper className={classes.widget}>
-            <p>Sign in now without a password.</p>
-            <p>Simply provide an e-mail address, and we will send you a login link.</p>
+            <p>To sign in, provide an e-mail address, and we will send you a login link.</p>
             <form onSubmit={sendEmailLink}>
                 <TextField
                     name="email"
