@@ -6,11 +6,15 @@ import {makeStyles} from '@material-ui/styles';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(() => ({
-    widget: {
-        padding: '10px',
-        width: '800px',
-        margin: 'auto',
-        marginTop: '10%'
+    signInForm: {
+        position: 'absolute',
+        width: '100%',
+        padding: '10px'
+    },
+    link: {
+        color: 'blue',
+        textDecoration: 'underline',
+        cursor: 'pointer'
     }
 }));
 
@@ -18,34 +22,52 @@ function LoginScreen() {
     const classes = useStyles();
     const auth = useAuth();
     const [email, setEmail] = useState('');
+    const [submitted, setSubmitted] = useState(false);
 
-    const updateValue = (event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
-    const sendEmailLink = (event: FormEvent<HTMLFormElement>) => {
+    const updateValue = (event: ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value);
+        setSubmitted(false);
+    };
+
+    const sendEmailLink = async (event: FormEvent<HTMLFormElement>) => {
         // do not reload page on form submit:
         event.preventDefault();
 
-        return auth.sendEmailLink(email);
+        await auth.sendEmailLink(email);
+        setSubmitted(true);
     };
 
     return (
-        <Paper className={classes.widget}>
-            <p>To sign in, provide an e-mail address, and we will send you a login link.</p>
-            <form onSubmit={sendEmailLink}>
-                <TextField
-                    name="email"
-                    required={true}
-                    fullWidth={true}
-                    value={email}
-                    onChange={updateValue}
-                    type="text"
-                    margin="normal"
-                    variant="outlined"
-                    label="Email"
-                />
-                <Button variant="contained" type="submit" fullWidth={false}>
-                    Send Email
-                </Button>
-            </form>
+        <Paper className={classes.signInForm}>
+            {submitted ? (
+                <>
+                    <p>We sent a sign-in link to {email}. Please check your inbox. </p>
+                    <p>
+                        No email in your inbox? <span className={classes.link}>Send again.</span>
+                    </p>
+                </>
+            ) : (
+                <>
+                    <p>To sign in, provide an e-mail address, and we will send you a sign-in link.</p>
+                    <form onSubmit={sendEmailLink}>
+                        <TextField
+                            name="email"
+                            required={true}
+                            fullWidth={true}
+                            value={email}
+                            onChange={updateValue}
+                            type="text"
+                            margin="normal"
+                            variant="outlined"
+                            label="Email"
+                        />
+
+                        <Button variant="contained" type="submit" fullWidth={false} disabled={submitted}>
+                            Send Email
+                        </Button>
+                    </form>
+                </>
+            )}
         </Paper>
     );
 }
