@@ -7,9 +7,9 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(() => ({
     signInForm: {
-        position: 'absolute',
-        width: '100%',
-        padding: '10px'
+        maxWidth: '800px',
+        padding: '10px',
+        margin: 'auto'
     },
     link: {
         color: 'blue',
@@ -24,18 +24,22 @@ function LoginScreen() {
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
-    const updateValue = (event: ChangeEvent<HTMLInputElement>) => {
+    function updateValue(event: ChangeEvent<HTMLInputElement>) {
         setEmail(event.target.value);
         setSubmitted(false);
-    };
+    }
 
-    const sendEmailLink = async (event: FormEvent<HTMLFormElement>) => {
+    async function sendEmailLink() {
+        console.log(`sending email to ${email}`);
+        return auth.sendEmailLink(email);
+    }
+
+    async function submitHandler(event: FormEvent<HTMLFormElement>) {
         // do not reload page on form submit:
         event.preventDefault();
-
-        await auth.sendEmailLink(email);
+        await sendEmailLink();
         setSubmitted(true);
-    };
+    }
 
     return (
         <Paper className={classes.signInForm}>
@@ -43,13 +47,14 @@ function LoginScreen() {
                 <>
                     <p>We sent a sign-in link to {email}. Please check your inbox. </p>
                     <p>
-                        No email in your inbox? <span className={classes.link}>Send again.</span>
+                        No email in your inbox? <span onClick={sendEmailLink} className={classes.link}>Send again.</span>
                     </p>
                 </>
             ) : (
                 <>
-                    <p>To sign in, provide an e-mail address, and we will send you a sign-in link.</p>
-                    <form onSubmit={sendEmailLink}>
+                    <h1>Welcome to Bline</h1>
+                    <p>To sign in, provide an email address, and we will send you a sign-in link.</p>
+                    <form onSubmit={submitHandler}>
                         <TextField
                             name="email"
                             required={true}
