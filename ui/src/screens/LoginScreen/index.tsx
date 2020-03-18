@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
         padding: '10px',
         margin: 'auto'
     },
-    link: {
+    clickableText: {
         color: 'blue',
         textDecoration: 'underline',
         cursor: 'pointer'
@@ -30,13 +30,13 @@ function LoginScreen() {
     }
 
     async function sendEmailLink() {
-        console.log(`sending email to ${email}`);
         return auth.sendEmailLink(email);
     }
 
     async function submitHandler(event: FormEvent<HTMLFormElement>) {
         // do not reload page on form submit:
         event.preventDefault();
+
         await sendEmailLink();
         setSubmitted(true);
     }
@@ -47,7 +47,10 @@ function LoginScreen() {
                 <>
                     <p>We sent a sign-in link to {email}. Please check your inbox. </p>
                     <p>
-                        No email in your inbox? <span onClick={sendEmailLink} className={classes.link}>Send again.</span>
+                        No email in your inbox?{' '}
+                        <span onClick={sendEmailLink} className={classes.clickableText}>
+                            Send again.
+                        </span>
                     </p>
                 </>
             ) : (
