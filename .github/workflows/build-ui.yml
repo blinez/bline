@@ -40,7 +40,7 @@ jobs:
       working-directory: ${{ env.UI_DIR }}
 
     - name: Build
-      run: npm run build
+      run: npm run build:prod
       working-directory: ${{ env.UI_DIR }}
 
     - name: Deploy to Firebase
