@@ -11,7 +11,7 @@ async function sendEmailLink(email: string): Promise<void> {
     const env = getEnv();
     const actionCodeSettings = {
         url: `${env.baseUrl}/finishSignUp`,
-        handleCodeInApp: true
+        handleCodeInApp: true,
     };
 
     console.log('sending email');

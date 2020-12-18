@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useAuthenticatedUser} from '../../auth/UserContext';
 
-export function DisplayNamePicker() {
+export function DisplayNamePicker(): JSX.Element {
     const user = useAuthenticatedUser();
 
     const [value, setValue] = useState<string>('');

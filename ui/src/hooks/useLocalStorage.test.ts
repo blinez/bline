@@ -20,7 +20,7 @@ describe('useLocalStorage', () => {
         expect(valueFromHook).toStrictEqual(value);
 
         const valueFromStorage = window.localStorage.getItem('someKey');
-        expect(JSON.parse(valueFromStorage!!)).toStrictEqual(value);
+        expect(JSON.parse(valueFromStorage!)).toStrictEqual(value);
     });
 
     it('should set a new value', () => {
@@ -31,12 +31,12 @@ describe('useLocalStorage', () => {
             setValue('newValue');
         });
 
-        const [value, ignore] = result.current;
+        const [value] = result.current;
 
         expect(value).toStrictEqual('newValue');
 
         const valueFromStorage = window.localStorage.getItem('someKey');
-        expect(JSON.parse(valueFromStorage!!)).toStrictEqual('newValue');
+        expect(JSON.parse(valueFromStorage!)).toStrictEqual('newValue');
     });
 
     it('should set a new value using a function', () => {
@@ -47,11 +47,11 @@ describe('useLocalStorage', () => {
             setValue(() => 'newValue');
         });
 
-        const [value, ignore] = result.current;
+        const [value] = result.current;
 
         expect(value).toStrictEqual('newValue');
 
         const valueFromStorage = window.localStorage.getItem('someKey');
-        expect(JSON.parse(valueFromStorage!!)).toStrictEqual('newValue');
+        expect(JSON.parse(valueFromStorage!)).toStrictEqual('newValue');
     });
 });

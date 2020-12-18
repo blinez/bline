@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import {useAuth} from './auth/AuthContext';
 import {useAuthenticatedUser} from './auth/UserContext';
 
-function AuthenticatedApp() {
+function AuthenticatedApp(): JSX.Element {
     const auth = useAuth();
     const user = useAuthenticatedUser();
 

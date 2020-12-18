@@ -1,6 +1,7 @@
 import React from 'react';
 import {useAuthenticatedUser} from '../../auth/UserContext';
 import {useHistory} from 'react-router-dom';
+import {Paper} from '@material-ui/core';
 
 function HomeScreen() {
     const user = useAuthenticatedUser();
@@ -11,9 +12,9 @@ function HomeScreen() {
     }
 
     return (
-        <>
+        <Paper>
             <h1>You are now logged in, {user.displayName}.</h1>
-        </>
+        </Paper>
     );
 }
 

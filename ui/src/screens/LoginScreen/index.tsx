@@ -3,22 +3,23 @@ import Button from '@material-ui/core/Button';
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useAuth} from '../../auth/AuthContext';
 import {makeStyles} from '@material-ui/styles';
-import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(() => ({
-    signInForm: {
-        maxWidth: '800px',
-        padding: '10px',
-        margin: 'auto'
-    },
+    // signInForm: {
+    //     backgroundColor: 'rgba(0,0,0,0.6)',
+    //     color: '#fff',
+    //     maxWidth: '800px',
+    //     padding: '10px',
+    //     margin: 'auto'
+    // },
     clickableText: {
         color: 'blue',
         textDecoration: 'underline',
-        cursor: 'pointer'
-    }
+        cursor: 'pointer',
+    },
 }));
 
-function LoginScreen() {
+function LoginScreen(): JSX.Element {
     const classes = useStyles();
     const auth = useAuth();
     const [email, setEmail] = useState('');
@@ -42,10 +43,12 @@ function LoginScreen() {
     }
 
     return (
-        <Paper className={classes.signInForm}>
+        <div>
             {submitted ? (
                 <>
-                    <p>We sent a sign-in link to {email}. Please check your inbox. </p>
+                    <p>
+                        We sent a sign-in link to <b>{email}</b>. Please check your inbox.{' '}
+                    </p>
                     <p>
                         No email in your inbox?{' '}
                         <span onClick={sendEmailLink} className={classes.clickableText}>
@@ -76,7 +79,7 @@ function LoginScreen() {
                     </form>
                 </>
             )}
-        </Paper>
+        </div>
     );
 }
 

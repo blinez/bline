@@ -7,13 +7,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import {MuiThemeProvider} from '@material-ui/core';
 import createPalette from '@material-ui/core/styles/createPalette';
+import './index.css';
 
 const theme = {
     palette: createPalette({
         background: {
-            default: '#303030'
-        }
-    })
+            default: '#303030',
+        },
+    }),
 };
 
 ReactDOM.render(

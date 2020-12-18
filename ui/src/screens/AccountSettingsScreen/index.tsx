@@ -4,7 +4,7 @@ import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useAuthenticatedUser} from '../../auth/UserContext';
 import {useHistory} from 'react-router-dom';
 
-function AccountSettingsScreen() {
+function AccountSettingsScreen(): JSX.Element {
     const user = useAuthenticatedUser();
     const history = useHistory();
 

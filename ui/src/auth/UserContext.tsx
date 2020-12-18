@@ -10,16 +10,12 @@ function UserProvider(props: {children: ReactNode}) {
 }
 
 function useUser(): firebase.User | null {
-    const context = React.useContext(UserContext);
-    if (context === undefined) {
-        throw new Error(`useUser must be used within a UserProvider`);
-    }
-    return context;
+    return React.useContext(UserContext);
 }
 
 function useAuthenticatedUser(): firebase.User {
     const user = React.useContext(UserContext);
-    if (user === undefined || user === null) {
+    if (user === null) {
         throw new Error(`useAuthenticatedUser must be used within AuthenticatedApp`);
     }
     return user;

@@ -12,7 +12,7 @@ const defaultState = {
     user: null,
     sendEmailLink: sendEmailLink,
     emailLogin: emailLogin,
-    logout: logout
+    logout: logout,
 };
 
 const AuthContext = React.createContext<{
@@ -22,7 +22,7 @@ const AuthContext = React.createContext<{
     logout: () => Promise<void>;
 }>(defaultState);
 
-function AuthProvider(props: {children: ReactNode}) {
+function AuthProvider(props: {children: ReactNode}): JSX.Element {
     const [userFromStorage, setUserInStorage] = useLocalStorage<firebase.User | null>('authedUser', null);
     const [auth, setAuth] = useState<Auth>({firebaseAuth: userFromStorage});
 

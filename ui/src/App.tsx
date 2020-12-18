@@ -3,7 +3,7 @@ import UnauthenticatedApp from './UnauthenticatedApp';
 import {useUser} from './auth/UserContext';
 import AuthenticatedApp from './AuthenticatedApp';
 
-function App() {
+function App(): JSX.Element {
     const user = useUser();
 
     if (user) {
