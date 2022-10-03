@@ -1,11 +1,11 @@
-import * as firebase from 'firebase/app';
 import React, {ReactNode, useContext, useEffect, useState} from 'react';
 import {emailLogin, logout, sendEmailLink} from './authClient';
 import {fbBline} from '../firebase/firebase';
 import useLocalStorage from '../hooks/useLocalStorage';
+import {getAuth, onAuthStateChanged, User} from 'firebase/auth';
 
 export interface Auth {
-    firebaseAuth: firebase.User | null;
+    firebaseAuth: User | null;
 }
 
 const defaultState = {
@@ -16,18 +16,19 @@ const defaultState = {
 };
 
 const AuthContext = React.createContext<{
-    user: firebase.User | null;
+    user: User | null;
     sendEmailLink: (email: string) => Promise<void>;
     emailLogin: (email: string, emailLink: string) => Promise<void>;
     logout: () => Promise<void>;
 }>(defaultState);
 
 function AuthProvider(props: {children: ReactNode}): JSX.Element {
-    const [userFromStorage, setUserInStorage] = useLocalStorage<firebase.User | null>('authedUser', null);
+    const [userFromStorage, setUserInStorage] = useLocalStorage<User | null>('authedUser', null);
     const [auth, setAuth] = useState<Auth>({firebaseAuth: userFromStorage});
 
     useEffect(() => {
-        return fbBline.auth().onAuthStateChanged((firebaseAuth: firebase.User | null) => {
+        const fbAuth = getAuth(fbBline);
+        return onAuthStateChanged(fbAuth, (firebaseAuth: User | null) => {
             setUserInStorage(firebaseAuth);
             setAuth({firebaseAuth});
         });

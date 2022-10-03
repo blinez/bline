@@ -2,6 +2,7 @@ import {TextField} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useAuthenticatedUser} from '../../auth/UserContext';
+import {updateProfile} from 'firebase/auth';
 
 export function DisplayNamePicker(): JSX.Element {
     const user = useAuthenticatedUser();
@@ -13,7 +14,7 @@ export function DisplayNamePicker(): JSX.Element {
 
     const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        user.updateProfile({displayName: value});
+        updateProfile(user, {displayName: value});
     };
 
     return (

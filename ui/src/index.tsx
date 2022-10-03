@@ -4,7 +4,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import AppProviders from './AppProviders';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import createTheme from '@material-ui/core/styles/createTheme';
 import {MuiThemeProvider} from '@material-ui/core';
 import createPalette from '@material-ui/core/styles/createPalette';
 import './index.css';
@@ -19,7 +19,7 @@ const theme = {
 
 ReactDOM.render(
     <AppProviders>
-        <MuiThemeProvider theme={createMuiTheme(theme)}>
+        <MuiThemeProvider theme={createTheme(theme)}>
             <CssBaseline>
                 <App />
             </CssBaseline>

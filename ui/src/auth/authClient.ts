@@ -1,8 +1,9 @@
 import {fbBline} from '../firebase/firebase';
 import {getEnv} from '../core/env/envService';
+import {getAuth, signOut, signInWithEmailLink, sendSignInLinkToEmail} from 'firebase/auth';
 
 async function emailLogin(email: string, emailLink: string): Promise<void> {
-    await fbBline.auth().signInWithEmailLink(email, emailLink);
+    await signInWithEmailLink(getAuth(fbBline), email, emailLink);
     localStorage.removeItem('emailForSignIn');
     return;
 }
@@ -15,7 +16,7 @@ async function sendEmailLink(email: string): Promise<void> {
     };
 
     console.log('sending email');
-    await fbBline.auth().sendSignInLinkToEmail(email, actionCodeSettings);
+    await sendSignInLinkToEmail(getAuth(fbBline), email, actionCodeSettings);
     localStorage.setItem('emailForSignIn', email);
     console.log('success');
 
@@ -23,7 +24,7 @@ async function sendEmailLink(email: string): Promise<void> {
 }
 
 function logout(): Promise<void> {
-    return fbBline.auth().signOut();
+    return signOut(getAuth(fbBline));
 }
 
 export {emailLogin, logout, sendEmailLink};

@@ -1,19 +1,19 @@
 import React, {ReactNode} from 'react';
 import {useAuth} from './AuthContext';
-import * as firebase from 'firebase';
+import {User} from 'firebase/auth';
 
-const UserContext = React.createContext<firebase.User | null>(null);
+const UserContext = React.createContext<User | null>(null);
 
 function UserProvider(props: {children: ReactNode}) {
     const auth = useAuth();
     return <UserContext.Provider value={auth.user} {...props} />;
 }
 
-function useUser(): firebase.User | null {
+function useUser(): User | null {
     return React.useContext(UserContext);
 }
 
-function useAuthenticatedUser(): firebase.User {
+function useAuthenticatedUser(): User {
     const user = React.useContext(UserContext);
     if (user === null) {
         throw new Error(`useAuthenticatedUser must be used within AuthenticatedApp`);

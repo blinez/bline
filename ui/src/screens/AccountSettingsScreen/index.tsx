@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useAuthenticatedUser} from '../../auth/UserContext';
 import {useHistory} from 'react-router-dom';
+import {updateProfile} from 'firebase/auth';
 
 function AccountSettingsScreen(): JSX.Element {
     const user = useAuthenticatedUser();
@@ -15,7 +16,7 @@ function AccountSettingsScreen(): JSX.Element {
 
     const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        user.updateProfile({displayName: value});
+        updateProfile(user, {displayName: value});
         history.push('/');
     };
 

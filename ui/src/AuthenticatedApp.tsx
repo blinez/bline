@@ -5,13 +5,14 @@ import AccountSettingsScreen from './screens/AccountSettingsScreen';
 import Button from '@material-ui/core/Button';
 import {useAuth} from './auth/AuthContext';
 import {useAuthenticatedUser} from './auth/UserContext';
+import {updateProfile} from 'firebase/auth';
 
 function AuthenticatedApp(): JSX.Element {
     const auth = useAuth();
     const user = useAuthenticatedUser();
 
     function clickHandler() {
-        user.updateProfile({displayName: null});
+        updateProfile(user, {displayName: null});
         auth.logout();
     }
 

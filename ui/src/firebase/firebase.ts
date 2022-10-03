@@ -1,12 +1,12 @@
-import * as firebase from 'firebase/app';
 import 'firebase/functions';
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/storage';
+import {initializeApp, getApps, FirebaseApp} from 'firebase/app';
 
-export const fbBline: firebase.app.App =
-    firebase.apps.length === 0
-        ? firebase.initializeApp({
+export const fbBline: FirebaseApp =
+    getApps().length === 0
+        ? initializeApp({
               apiKey: 'AIzaSyCD3PO2Z7luNqKIrkvbUciofuwVdjESTxk',
               authDomain: 'bline-8bac2.firebaseapp.com',
               databaseURL: 'https://bline-8bac2.firebaseio.com',
@@ -15,4 +15,4 @@ export const fbBline: firebase.app.App =
               messagingSenderId: '1070002645087',
               appId: '1:1070002645087:web:cb571f0563c801670f13ea',
           })
-        : firebase.apps[0];
+        : getApps()[0];
